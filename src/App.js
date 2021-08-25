@@ -1,32 +1,45 @@
 import React, { useState } from 'react'
 import './App.css';
-import CSSTransition from 'react-transition-group/CSSTransition'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 function App() {
 
-  const [isOn, setIson] = useState(true)
+  const [myList, setMyList] = useState([]);
 
-  function handleClick() {
-    setIson(!isOn)
+  function add() {
+    setMyList([...myList, { id: Date.now() }])
+  }
+
+  function remove() {
+
+    if (myList.length) {
+      setMyList(myList.splice(1))
+    }
   }
 
   return (
     <div>
-      <CSSTransition appear={true} in={isOn} timeout={{
-        enter: 300,
-        exit: 500
-      }} classNames={{
-        enter: 'entrando',
-        exitDone: 'saindo'
-      }} >
+      <button onClick={add}>add</button>
+      <button onClick={remove}>remove</button>
+
+      <TransitionGroup>
         {
-          (status) => {
-            return <button onClick={handleClick} className={'btn'}> Click </button>
-          }
+
+          myList.map(item => {
+            return <CSSTransition appear={true} key={item.id} timeout={300} classNames={{
+              enter: 'entrando',
+              exitActive: 'saindo'
+            }} >
+              {
+                (status) => {
+                  return <div className={'btn'}> {item.id} </div>
+                }
+              }
+
+            </CSSTransition>
+          })
         }
-
-      </CSSTransition>
-
+      </TransitionGroup>
     </div>
   );
 }
