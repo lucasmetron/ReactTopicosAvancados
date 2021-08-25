@@ -9,7 +9,7 @@
 }
 
 
-.btn.exited, .btn.entering{
+.entrando, .saindo{
   left: 100px;
   opacity: 0;
   background-color: gray;

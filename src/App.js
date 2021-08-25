@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './App.css';
-import Transition from 'react-transition-group/Transition'
+import CSSTransition from 'react-transition-group/CSSTransition'
 
 function App() {
 
@@ -12,18 +12,20 @@ function App() {
 
   return (
     <div>
-      <Transition appear={true} unmountOnExit={true} in={isOn} timeout={{
+      <CSSTransition appear={true} in={isOn} timeout={{
         enter: 300,
         exit: 500
+      }} classNames={{
+        enter: 'entrando',
+        exitDone: 'saindo'
       }} >
         {
           (status) => {
-            return <button onClick={handleClick} className={'btn ' + status}> Click </button>
+            return <button onClick={handleClick} className={'btn'}> Click </button>
           }
         }
 
-      </Transition>
-
+      </CSSTransition>
 
     </div>
   );
