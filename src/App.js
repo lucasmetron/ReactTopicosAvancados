@@ -1,45 +1,27 @@
 import React, { useState } from 'react'
 import './App.css';
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import About from './views/About';
+import Index from './views/Index';
 
 function App() {
 
-  const [myList, setMyList] = useState([]);
-
-  function add() {
-    setMyList([...myList, { id: Date.now() }])
-  }
-
-  function remove() {
-
-    if (myList.length) {
-      setMyList(myList.splice(1))
-    }
-  }
 
   return (
     <div>
-      <button onClick={add}>add</button>
-      <button onClick={remove}>remove</button>
+      <Router>
+        <nav>
+          <ul>
+            <li> <Link to='/'> Index</Link> </li>
+            <li> <Link to='/about'>About</Link> </li>
+          </ul>
+        </nav>
+        <Route path='/' exact component={Index} />
+        <Route path='/about' component={About} />
+        {/* <Route path='/about' component={AboutMenu} /> Pode ser colocado dois componentes para a mesma rota */}
 
-      <TransitionGroup>
-        {
+      </Router>
 
-          myList.map(item => {
-            return <CSSTransition appear={true} key={item.id} timeout={300} classNames={{
-              enter: 'entrando',
-              exitActive: 'saindo'
-            }} >
-              {
-                (status) => {
-                  return <div className={'btn'}> {item.id} </div>
-                }
-              }
-
-            </CSSTransition>
-          })
-        }
-      </TransitionGroup>
     </div>
   );
 }
