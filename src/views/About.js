@@ -13,15 +13,15 @@ export default function About(props) {
             <nav>
                 <ul>
                     <li>
-                        <Link to={`${match.url}/address`} >Address</Link>
+                        <Link to={`address`} >Address</Link>
                     </li>
                     <li>
-                        <Link to={`${match.url}/contact`} >Contact</Link>
+                        <Link to={`contact`} >Contact</Link>
                     </li>
                 </ul>
             </nav>
-            <Route path={`${match.path}address`} exact component={Address} />
-            <Route path={`${match.path}contact`} component={Contact} />
+            <Route path={`/about/address`} exact component={Address} />
+            <Route path={`/about/contact`} component={Contact} />
         </div>
     );
 }
