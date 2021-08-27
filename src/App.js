@@ -1,33 +1,17 @@
-import React, { Suspense } from 'react' //lib q precisa ser importada
+//@flow
+import React, { useState } from 'react' //lib q precisa ser importada
 import './App.css';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Index from './views/Index';
-import Adress from './views/about/Adress';
-import loadable from '@loadable/component';
 
-const About = loadable(() => import('./views/About')) //impotação dinÂmica
 
-function App() {
 
+
+function App(props) {
+
+  const [counter, setCounter] = useState(0);
 
   return (
     <div>
-      <Router>
-        <nav>
-          <ul>
-            <li> <Link to='/'> Index</Link> </li>
-            <li> <Link to='/about/'>About</Link> </li>
-          </ul>
-        </nav>
-        <Suspense fallback={<div>Loading...</div>}> {/* Dessa forma, todas as rotas fica com a div loading setada caso estejam carregando */}
-          <Switch>
-            <Route path='/' exact component={Index} />
-            <Route path='/about/' component={() => <About />} /> {/* Dessa forma, componente About só sera carregado quando acessado*/}
-            <Route path='/:abc' component={Adress} />
-          </Switch>
-        </Suspense>
-      </Router>
-
+      <h1>Hello!</h1>
     </div>
   );
 }
