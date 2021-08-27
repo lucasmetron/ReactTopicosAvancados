@@ -3,8 +3,9 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Index from './views/Index';
 import Adress from './views/about/Adress';
+import loadable from '@loadable/component';
 
-const About = React.lazy(() => import('./views/About')) //impotação dinÂmica
+const About = loadable(() => import('./views/About')) //impotação dinÂmica
 
 function App() {
 
